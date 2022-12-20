@@ -1,19 +1,19 @@
-/*
- * File: 103-python.c
- */
-
 #include <Python.h>
+#include <object.h>
+#include <listobject.h>
+#include <bytesobject.h>
 
 void print_python_list(PyObject *p);
 void print_python_bytes(PyObject *p);
 
 /**
  * print_python_list - Prints basic info about Python lists.
+ *
  * @p: A PyObject list object.
  */
 void print_python_list(PyObject *p)
 {
-	int size, alloc, i;
+	int size, alloc, index;
 	const char *type;
 	PyListObject *list = (PyListObject *)p;
 	PyVarObject *var = (PyVarObject *)p;
@@ -25,17 +25,18 @@ void print_python_list(PyObject *p)
 	printf("[*] Size of the Python List = %d\n", size);
 	printf("[*] Allocated = %d\n", alloc);
 
-	for (i = 0; i < size; i++)
+	for (index = 0; index < size; index++)
 	{
-		type = list->ob_item[i]->ob_type->tp_name;
-		printf("Element %d: %s\n", i, type);
+		type = list->ob_item[index]->ob_type->tp_name;
+		printf("Element %d: %s\n", index, type);
 		if (strcmp(type, "bytes") == 0)
-			print_python_bytes(list->ob_item[i]);
+			print_python_bytes(list->ob_item[index]);
 	}
 }
 
 /**
  * print_python_bytes - Prints basic info about Python byte objects.
+ *
  * @p: A PyObject byte object.
  */
 void print_python_bytes(PyObject *p)

@@ -1,11 +1,5 @@
 #!/usr/bin/python3
-i = 122
-while i >= 97:
-    flag = 0
-    if i % 2 != 0:
-        i = i - 32
-        flag = 1
-    print("{:s}".format(chr(i)), end="")
-    if flag == 1:
-        i = i + 32
-    i = i - 1
+index = 0
+for ch in range(ord('z'), ord('a') - 1, -1):
+    print("{}".format(chr(ch - index)), end="")
+    index = 32 if index == 0 else 0
